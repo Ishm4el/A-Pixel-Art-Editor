@@ -18,6 +18,7 @@ export default class Picture {
   }
 
   draw(pixels: { x: number; y: number; color: string }[]) {
+    console.log(pixels);
     const copy = this.pixels.slice();
     for (const { x, y, color } of pixels) {
       copy[x + y * this.width] = color;

@@ -24,7 +24,7 @@ interface config {
   dispatch: dispatch;
 }
 
-export default class PictureEditor {
+export default class PixelEditor {
   dom: React.ReactNode;
   state: {
     tool: "draw" | "fill" | "pick" | "rectangle";

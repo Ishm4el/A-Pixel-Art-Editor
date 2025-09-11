@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Picture from "./Picture";
-import PictureEditor from "./PictureEditor";
 import { draw, fill, pick, rectangle } from "./tools";
 import ToolSelect from "./ToolSelect";
 import ColorSelect from "./ColorSelect";
 import State, { type tool } from "./State";
+import PixelEditor from "./PixelEditor.tsx";
 
 export default function App() {
   const [state, setState] = useState(
@@ -15,29 +15,32 @@ export default function App() {
     })
   );
 
-  const [app] = useState(
-    new PictureEditor(state, {
-      tools: { draw, fill, rectangle, pick },
-      controls: [ToolSelect, ColorSelect],
-      dispatch: (action: {
-        tool?: tool;
-        color?: string;
-        picture?: Picture;
-      }) => {
-        const update = (updatedState: State) => {
-          setState(updatedState);
-          app.syncState(updatedState);
-        };
+  return (
+    <>
+      <PixelEditor
+        state={state}
+        config={{
+          tools: { draw, fill, rectangle, pick },
+          controls: [ToolSelect, ColorSelect],
+          dispatch: (action: {
+            tool?: tool;
+            color?: string;21
+            picture?: Picture;
+          }) => {
+            const update = (updatedState: State) => {
+              setState(updatedState);
+            };
 
-        update(
-          new State({
-            color: action.color ?? state.color,
-            tool: action.tool ?? state.tool,
-            picture: action.picture ?? state.picture,
-          })
-        );
-      },
-    })
+            update(
+              new State({
+                color: action.color ?? state.color,
+                tool: action.tool ?? state.tool,
+                picture: action.picture ?? state.picture,
+              })
+            );
+          },
+        }}
+      />
+    </>
   );
-  return <>{app}</>;
 }

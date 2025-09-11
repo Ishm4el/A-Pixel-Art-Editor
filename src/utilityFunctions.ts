@@ -1,13 +1,13 @@
 import { SCALE } from "./settings";
 
 function pointerPosition(
-  pos: globalThis.MouseEvent | Touch,
-  domNode: React.ReactElement<
-    HTMLCanvasElement,
-    string | React.JSXElementConstructor<HTMLCanvasElement>
-  >
+  pos:
+    | React.MouseEvent<HTMLCanvasElement, MouseEvent>
+    | MouseEvent
+    | React.Touch,
+  domNode: HTMLCanvasElement
 ) {
-  const rect = domNode.props.getBoundingClientRect();
+  const rect = domNode.getBoundingClientRect();
   return {
     x: Math.floor((pos.clientX - rect.left) / SCALE),
     y: Math.floor((pos.clientY - rect.top) / SCALE),

@@ -1,5 +1,5 @@
 import State from "./State";
-import { type dispatch } from "./PictureEditor";
+import { type dispatch } from "./PixelEditor";
 
 function draw(pos: pos, state: State, dispatch: dispatch) {
   function drawPixel({ x, y }: { x: number; y: number }, state: State) {
