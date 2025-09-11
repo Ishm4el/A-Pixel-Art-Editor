@@ -3,6 +3,7 @@ import Picture from "./Picture";
 import { draw, fill, pick, rectangle } from "./tools";
 import State, { type tool } from "./State";
 import PixelEditor from "./PixelEditor";
+import { StateContext } from "./StateContext";
 
 export default function App() {
   const [state, setState] = useState(
@@ -14,7 +15,7 @@ export default function App() {
   );
 
   return (
-    <>
+    <StateContext.Provider value={{ setState, state }}>
       <PixelEditor
         state={state}
         config={{
@@ -25,6 +26,8 @@ export default function App() {
             picture?: Picture;
           }) => {
             setState((prev) => {
+              console.log(action);
+              console.log(prev);
               return new State({
                 color: action.color ?? prev.color,
                 tool: action.tool ?? prev.tool,
@@ -34,6 +37,6 @@ export default function App() {
           },
         }}
       />
-    </>
+    </StateContext.Provider>
   );
 }
