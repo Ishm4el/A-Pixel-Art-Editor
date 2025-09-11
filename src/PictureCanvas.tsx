@@ -25,6 +25,8 @@ export default function PictureCanvas({ picture, pointerDown }: PictureCanvas) {
       let pos = pointerPosition(downEvent, canvasElement);
       const onMove = onDown(pos);
       if (!onMove) return;
+      console.log("moving");
+
       const move = (moveEvent: MouseEvent) => {
         if (canvasRef.current) {
           if (moveEvent.buttons == 0) {

@@ -1,10 +1,8 @@
 import { useState } from "react";
 import Picture from "./Picture";
 import { draw, fill, pick, rectangle } from "./tools";
-import ToolSelect from "./ToolSelect";
-import ColorSelect from "./ColorSelect";
 import State, { type tool } from "./State";
-import PixelEditor from "./PixelEditor.tsx";
+import PixelEditor from "./PixelEditor";
 
 export default function App() {
   const [state, setState] = useState(
@@ -21,23 +19,18 @@ export default function App() {
         state={state}
         config={{
           tools: { draw, fill, rectangle, pick },
-          controls: [ToolSelect, ColorSelect],
           dispatch: (action: {
             tool?: tool;
-            color?: string;21
+            color?: string;
             picture?: Picture;
           }) => {
-            const update = (updatedState: State) => {
-              setState(updatedState);
-            };
-
-            update(
-              new State({
-                color: action.color ?? state.color,
-                tool: action.tool ?? state.tool,
-                picture: action.picture ?? state.picture,
-              })
-            );
+            setState((prev) => {
+              return new State({
+                color: action.color ?? prev.color,
+                tool: action.tool ?? prev.tool,
+                picture: action.picture ?? prev.picture,
+              });
+            });
           },
         }}
       />

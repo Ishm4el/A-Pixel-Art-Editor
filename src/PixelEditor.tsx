@@ -11,7 +11,7 @@ type pos = {
   y: number;
 };
 
-type controls = [typeof ToolSelect, typeof ColorSelect];
+// type controls = [typeof ToolSelect, typeof ColorSelect];
 
 export type dispatch = (action: {
   tool?: tool | undefined;
@@ -26,7 +26,7 @@ export interface config {
     pick: typeof pick;
     rectangle: typeof rectangle;
   };
-  controls: controls;
+  // controls: controls;
   dispatch: dispatch;
 }
 

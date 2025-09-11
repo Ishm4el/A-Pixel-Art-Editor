@@ -1,5 +1,5 @@
 import State from "./State";
-import type { config } from "./PixelEditor.tsx";
+import type { config } from "./PixelEditor";
 
 interface ColorSelect {
   state: State;
