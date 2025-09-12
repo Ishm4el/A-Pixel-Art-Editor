@@ -1,15 +1,15 @@
-import { draw, fill, pick, rectangle } from "./tools";
 import State from "./State";
+import { type config } from "./PixelEditor";
 
-interface config {
-  tools: {
-    draw: typeof draw;
-    fill: typeof fill;
-    pick: typeof pick;
-    rectangle: typeof rectangle;
-  };
-  dispatch: (action: { [key: string]: string }) => void;
-}
+// interface config {
+//   tools: {
+//     draw: typeof draw;
+//     fill: typeof fill;
+//     pick: typeof pick;
+//     rectangle: typeof rectangle;
+//   };
+//   dispatch: (action: { [key: string]: string }) => void;
+// }
 
 interface ToolSelect {
   state: State;

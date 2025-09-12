@@ -1,6 +1,6 @@
 import PictureCanvas from "./PictureCanvas.tsx";
 import type Picture from "./Picture";
-import { draw, fill, pick, rectangle } from "./tools";
+import { fill, pick, rectangle, draw } from "./tools";
 import ToolSelect from "./ToolSelect.tsx";
 import ColorSelect from "./ColorSelect.tsx";
 import type State from "./State";
@@ -14,7 +14,7 @@ type pos = {
 // type controls = [typeof ToolSelect, typeof ColorSelect];
 
 export type dispatch = (action: {
-  tool?: tool | undefined;
+  tool?: tool;
   color?: string;
   picture?: Picture;
 }) => void;
@@ -30,24 +30,29 @@ export interface config {
   dispatch: dispatch;
 }
 
+export type masterState = [State, React.Dispatch<React.SetStateAction<State>>];
+
 interface PixelEditor {
-  state: State;
+  masterState: masterState;
   config: config;
 }
 
-export default function PixelEditor({ state, config }: PixelEditor) {
+export default function PixelEditor({ masterState, config }: PixelEditor) {
   const posFunction = (pos: pos) => {
-    const tool = config.tools[state.tool];
-    const onMove = tool(pos, state, config.dispatch);
-    if (onMove) return (pos: pos) => onMove(pos, state);
+    const tool = config.tools[masterState[0].tool];
+    const onMove = tool(pos, masterState, config.dispatch);
+    if (onMove) return (pos: pos) => onMove(pos, masterState);
   };
 
   return (
     <div>
-      <PictureCanvas picture={state.picture} pointerDown={posFunction} />
+      <PictureCanvas
+        picture={masterState[0].picture}
+        pointerDown={posFunction}
+      />
       <br />
-      <ToolSelect config={config} state={state} />{" "}
-      <ColorSelect config={config} state={state} />
+      <ToolSelect config={config} state={masterState[0]} />{" "}
+      <ColorSelect config={config} state={masterState[0]} />
     </div>
   );
 }

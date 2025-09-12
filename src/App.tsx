@@ -1,12 +1,11 @@
 import { useState } from "react";
 import Picture from "./Picture";
-import { draw, fill, pick, rectangle } from "./tools";
+import { fill, pick, rectangle, draw } from "./tools";
 import State, { type tool } from "./State";
 import PixelEditor from "./PixelEditor";
-import { StateContext } from "./StateContext";
 
 export default function App() {
-  const [state, setState] = useState(
+  const masterState = useState(
     new State({
       tool: "draw",
       color: "#000000",
@@ -15,28 +14,24 @@ export default function App() {
   );
 
   return (
-    <StateContext.Provider value={{ setState, state }}>
-      <PixelEditor
-        state={state}
-        config={{
-          tools: { draw, fill, rectangle, pick },
-          dispatch: (action: {
-            tool?: tool;
-            color?: string;
-            picture?: Picture;
-          }) => {
-            setState((prev) => {
-              console.log(action);
-              console.log(prev);
-              return new State({
-                color: action.color ?? prev.color,
-                tool: action.tool ?? prev.tool,
-                picture: action.picture ?? prev.picture,
-              });
+    <PixelEditor
+      masterState={masterState}
+      config={{
+        tools: { draw, fill, rectangle, pick },
+        dispatch: (action: {
+          tool?: tool;
+          color?: string;
+          picture?: Picture;
+        }) => {
+          masterState[1]((prev) => {
+            return new State({
+              color: action.color ?? prev.color,
+              tool: action.tool ?? prev.tool,
+              picture: action.picture ?? prev.picture,
             });
-          },
-        }}
-      />
-    </StateContext.Provider>
+          });
+        },
+      }}
+    />
   );
 }
