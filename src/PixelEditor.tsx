@@ -6,6 +6,7 @@ import ColorSelect from "./ColorSelect.tsx";
 import type State from "./State";
 import type { tool } from "./State";
 import SaveButton from "./SaveButton.tsx";
+import LoadButton from "./LoadButton.tsx";
 
 type pos = {
   x: number;
@@ -55,6 +56,7 @@ export default function PixelEditor({ masterState, config }: PixelEditor) {
       <ToolSelect config={config} state={masterState[0]} />{" "}
       <ColorSelect config={config} state={masterState[0]} />{" "}
       <SaveButton state={masterState[0]} />
+      <LoadButton dispatch={config.dispatch} />
     </div>
   );
 }

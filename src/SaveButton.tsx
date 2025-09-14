@@ -13,7 +13,7 @@ export default function SaveButton({ state }: SaveButton) {
     <>
       <button
         onClick={() => {
-          const scale = SCALE;
+          const scale = 1;
           const picture = state.picture;
           const canvas = canvasRef.current;
           if (canvas) {
