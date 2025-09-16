@@ -1,9 +1,9 @@
 import { useRef } from "react";
-import type { dispatch } from "./PixelEditor";
+import type { DispatchFunction } from "./PixelEditor";
 import Picture from "./Picture";
 
 interface LoadButton {
-  dispatch: dispatch;
+  dispatch: DispatchFunction;
 }
 export default function LoadButton({ dispatch }: LoadButton) {
   const loadInputRef = useRef<HTMLInputElement | null>(null);
@@ -46,7 +46,7 @@ export default function LoadButton({ dispatch }: LoadButton) {
     }
   };
 
-  const finishLoad = (file: File, dispatch: dispatch) => {
+  const finishLoad = (file: File, dispatch: DispatchFunction) => {
     if (file === null) return;
 
     const image = imageRef.current;

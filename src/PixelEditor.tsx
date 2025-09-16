@@ -7,6 +7,7 @@ import type State from "./State";
 import type { tool } from "./State";
 import SaveButton from "./SaveButton.tsx";
 import LoadButton from "./LoadButton.tsx";
+import UndoButton from "./UndoButton.tsx";
 
 type pos = {
   x: number;
@@ -15,11 +16,14 @@ type pos = {
 
 // type controls = [typeof ToolSelect, typeof ColorSelect];
 
-export type dispatch = (action: {
+export interface Dispatch {
   tool?: tool;
   color?: string;
   picture?: Picture;
-}) => void;
+  undo?: boolean;
+}
+
+export type DispatchFunction = (action: Dispatch) => void;
 
 export interface config {
   tools: {
@@ -29,7 +33,7 @@ export interface config {
     rectangle: typeof rectangle;
   };
   // controls: controls;
-  dispatch: dispatch;
+  dispatch: DispatchFunction;
 }
 
 export type masterState = [State, React.Dispatch<React.SetStateAction<State>>];
@@ -57,6 +61,7 @@ export default function PixelEditor({ masterState, config }: PixelEditor) {
       <ColorSelect config={config} state={masterState[0]} />{" "}
       <SaveButton state={masterState[0]} />
       <LoadButton dispatch={config.dispatch} />
+      <UndoButton dispatch={config.dispatch} state={masterState[0]} />
     </div>
   );
 }
