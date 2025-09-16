@@ -15,8 +15,6 @@ export default function App() {
 
   const dispatchHandler = (action: Dispatch) => {
     masterState[1]((prev) => {
-      console.log(prev.doneAt < Date.now() - 1000);
-
       if (action.undo === true) {
         if (masterState[0].done.length === 0) return prev;
         return new State({
@@ -27,8 +25,6 @@ export default function App() {
           tool: prev.tool,
         });
       } else if (action.picture && prev.doneAt < Date.now() - 1000) {
-        console.log("in action.picture");
-
         return new State({
           ...prev,
           color: action.color ?? prev.color,

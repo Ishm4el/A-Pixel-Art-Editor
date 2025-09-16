@@ -1,5 +1,5 @@
 import State from "./State";
-import { type dispatch } from "./PixelEditor";
+import { type DispatchFunction } from "./PixelEditor";
 
 type masterState = [State, React.Dispatch<React.SetStateAction<State>>];
 
@@ -9,21 +9,45 @@ function draw(pos: pos, masterState: masterState) {
     masterState: masterState
   ) {
     const drawn = { x, y, color: masterState[0].color };
-    // dispatch({ picture: masterState[0].picture.draw([drawn]) });
-    masterState[1](
-      (prev) =>
-        new State({
-          tool: prev.tool,
+
+    masterState[1]((prev) => {
+      const newDrawing = prev.picture.draw([drawn]);
+      if (prev.done.length === 0)
+        return new State({
+          ...prev,
           color: prev.color,
-          picture: prev.picture.draw([drawn]),
-        })
-    );
+          tool: prev.tool,
+          picture: newDrawing,
+          done: [prev.picture],
+          doneAt: Date.now(),
+        });
+      else if (prev.doneAt < Date.now() - 1000)
+        return new State({
+          ...prev,
+          color: prev.color,
+          tool: prev.tool,
+          picture: newDrawing,
+          done: [newDrawing, ...prev.done],
+          doneAt: Date.now(),
+        });
+      else
+        return new State({
+          ...prev,
+          color: prev.color,
+          tool: prev.tool,
+          picture: newDrawing,
+        });
+    });
   }
   drawPixel(pos, masterState);
   return drawPixel;
 }
 
-function rectangle(start: pos, masterState: masterState, dispatch: dispatch) {
+function rectangle(
+  start: pos,
+  masterState: masterState,
+  dispatch: DispatchFunction
+) {
   function drawRectangle(pos: pos) {
     const xStart = Math.min(start.x, pos.x);
     const yStart = Math.min(start.y, pos.y);
@@ -52,7 +76,7 @@ const around = [
 function fill(
   { x, y }: { x: number; y: number },
   masterState: masterState,
-  dispatch: dispatch
+  dispatch: DispatchFunction
 ) {
   const targetColor = masterState[0].picture.pixel(x, y);
   const drawn = [{ x, y, color: masterState[0].color }];
@@ -76,7 +100,7 @@ function fill(
   dispatch({ picture: masterState[0].picture.draw(drawn) });
 }
 
-function pick(pos: pos, masterState: masterState, dispatch: dispatch) {
+function pick(pos: pos, masterState: masterState, dispatch: DispatchFunction) {
   dispatch({ color: masterState[0].picture.pixel(pos.x, pos.y) });
 }
 
