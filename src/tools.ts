@@ -4,14 +4,12 @@ import { type DispatchFunction } from "./PixelEditor";
 type masterState = [State, React.Dispatch<React.SetStateAction<State>>];
 
 function draw(pos: pos, masterState: masterState) {
-  function drawPixel(
-    { x, y }: { x: number; y: number },
-    masterState: masterState
-  ) {
-    const drawn = { x, y, color: masterState[0].color };
-
+  function drawPixel(newPos: pos, masterState: masterState) {
+    // const drawn = { x, y, color: masterState[0].color };
+    const line = drawLine(pos, newPos, masterState[0].color);
+    pos = newPos;
     masterState[1]((prev) => {
-      const newDrawing = prev.picture.draw([drawn]);
+      const newDrawing = prev.picture.draw(line);
       if (prev.done.length === 0)
         return new State({
           ...prev,
