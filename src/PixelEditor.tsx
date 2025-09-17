@@ -1,6 +1,6 @@
 import PictureCanvas from "./PictureCanvas.tsx";
 import type Picture from "./Picture";
-import { fill, pick, rectangle, draw } from "./tools";
+import { fill, pick, rectangle, draw, line } from "./tools";
 import ToolSelect from "./ToolSelect.tsx";
 import ColorSelect from "./ColorSelect.tsx";
 import type State from "./State";
@@ -31,6 +31,7 @@ export interface config {
     fill: typeof fill;
     pick: typeof pick;
     rectangle: typeof rectangle;
+    line: typeof line;
   };
   // controls: controls;
   dispatch: DispatchFunction;
@@ -55,6 +56,7 @@ export default function PixelEditor({ masterState, config }: PixelEditor) {
       <PictureCanvas
         picture={masterState[0].picture}
         pointerDown={posFunction}
+        previous={masterState[0].done[0]}
       />
       <br />
       <ToolSelect config={config} state={masterState[0]} />{" "}

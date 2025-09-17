@@ -11,8 +11,14 @@ type pos = {
 interface PictureCanvas {
   picture: Picture;
   pointerDown: (pos: pos) => ((pos: pos) => void) | undefined;
+  previous: Picture;
 }
-export default function PictureCanvas({ picture, pointerDown }: PictureCanvas) {
+
+export default function PictureCanvas({
+  picture,
+  pointerDown,
+  previous,
+}: PictureCanvas) {
   const canvasRef = useRef<null | HTMLCanvasElement>(null);
 
   const mouse = (
@@ -79,8 +85,11 @@ export default function PictureCanvas({ picture, pointerDown }: PictureCanvas) {
 
       for (let y = 0; y < picture.height; y++) {
         for (let x = 0; x < picture.width; x++) {
-          cx.fillStyle = picture.pixel(x, y);
-          cx.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
+          // const color = picture.pixel(x, y);
+          // if (previous == null || previous.pixel(x, y) != color) {
+            cx.fillStyle = picture.pixel(x, y);
+            cx.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
+          // }
         }
       }
     }

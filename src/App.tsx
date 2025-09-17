@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Picture from "./Picture";
-import { fill, pick, rectangle, draw } from "./tools";
+import { fill, pick, rectangle, draw, line } from "./tools";
 import State from "./State";
 import PixelEditor, { type Dispatch } from "./PixelEditor";
 
@@ -48,7 +48,7 @@ export default function App() {
     <PixelEditor
       masterState={masterState}
       config={{
-        tools: { draw, fill, rectangle, pick },
+        tools: { draw, fill, rectangle, pick, line },
         dispatch: dispatchHandler,
       }}
     />

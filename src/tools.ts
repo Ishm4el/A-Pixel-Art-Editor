@@ -43,6 +43,33 @@ function draw(pos: pos, masterState: masterState) {
   return drawPixel;
 }
 
+function drawLine(from: pos, to: pos, color: string) {
+  const points = [];
+  if (Math.abs(from.x - to.x) > Math.abs(from.y - to.y)) {
+    if (from.x > to.x) [from, to] = [to, from];
+    const slope = (to.y - from.y) / (to.x - from.x);
+    for (let { x, y } = from; x <= to.x; x++) {
+      points.push({ x, y: Math.round(y), color });
+      y += slope;
+    }
+  } else {
+    if (from.y > to.y) [from, to] = [to, from];
+    const slope = (to.x - from.x) / (to.y - from.y);
+    for (let { x, y } = from; y <= to.y; y++) {
+      points.push({ x: Math.round(x), y, color });
+      x += slope;
+    }
+  }
+  return points;
+}
+
+function line(pos: pos, masterState: masterState, dispatch: DispatchFunction) {
+  return (end: pos) => {
+    const line = drawLine(pos, end, masterState[0].color);
+    dispatch({ picture: masterState[0].picture.draw(line) });
+  };
+}
+
 function rectangle(
   start: pos,
   masterState: masterState,
@@ -104,4 +131,4 @@ function pick(pos: pos, masterState: masterState, dispatch: DispatchFunction) {
   dispatch({ color: masterState[0].picture.pixel(pos.x, pos.y) });
 }
 
-export { draw, rectangle, fill, pick };
+export { draw, rectangle, fill, pick, line };

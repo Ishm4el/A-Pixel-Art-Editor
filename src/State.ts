@@ -1,7 +1,7 @@
 import Picture from "./Picture";
 
 type action = { [key: string]: string };
-export type tool = "fill" | "pick" | "rectangle" | "draw";
+export type tool = "fill" | "pick" | "rectangle" | "draw" | "line";
 
 interface Class {
   tool: tool;
