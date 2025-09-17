@@ -129,4 +129,38 @@ function pick(pos: pos, masterState: masterState, dispatch: DispatchFunction) {
   dispatch({ color: masterState[0].picture.pixel(pos.x, pos.y) });
 }
 
-export { draw, rectangle, fill, pick, line };
+function circle(
+  pos: pos,
+  masterState: masterState,
+  dispatch: DispatchFunction
+) {
+  function drawCircle(to: pos) {
+    const radius = Math.sqrt((to.x - pos.x) ** 2 + (to.y - pos.y) ** 2);
+    const radiusC = Math.ceil(radius);
+
+    const drawn = [];
+    for (let dy = -radiusC; dy <= radiusC; dy++) {
+      for (let dx = -radiusC; dx <= radiusC; dx++) {
+        const dist = Math.sqrt(dx ** 2 + dy ** 2);
+        if (dist > radius) continue;
+
+        const y = pos.y + dy;
+        const x = pos.x + dx;
+        if (
+          y < 0 ||
+          y >= masterState[0].picture.height ||
+          x < 0 ||
+          x >= masterState[0].picture.width
+        )
+          continue;
+
+        drawn.push({ x, y, color: masterState[0].color });
+      }
+      dispatch({ picture: masterState[0].picture.draw(drawn) });
+    }
+  }
+  drawCircle(pos);
+  return drawCircle;
+}
+
+export { draw, rectangle, fill, pick, line, circle };

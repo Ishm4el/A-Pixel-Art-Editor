@@ -1,6 +1,6 @@
 import PictureCanvas from "./PictureCanvas.tsx";
 import type Picture from "./Picture";
-import { fill, pick, rectangle, draw, line } from "./tools";
+import { fill, pick, rectangle, draw, line, circle } from "./tools";
 import ToolSelect from "./ToolSelect.tsx";
 import ColorSelect from "./ColorSelect.tsx";
 import type State from "./State";
@@ -32,6 +32,7 @@ export interface config {
     pick: typeof pick;
     rectangle: typeof rectangle;
     line: typeof line;
+    circle: typeof circle;
   };
   // controls: controls;
   dispatch: DispatchFunction;
