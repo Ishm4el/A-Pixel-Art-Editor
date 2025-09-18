@@ -1,13 +1,13 @@
-import PictureCanvas from "./PictureCanvas.tsx";
-import type Picture from "./Picture";
-import { fill, pick, rectangle, draw, line, circle } from "./tools";
-import ToolSelect from "./ToolSelect.tsx";
-import ColorSelect from "./ColorSelect.tsx";
-import type State from "./State";
-import type { tool } from "./State";
-import SaveButton from "./SaveButton.tsx";
-import LoadButton from "./LoadButton.tsx";
-import UndoButton from "./UndoButton.tsx";
+import PictureCanvas from "./PixelEditor Components/PictureCanvas.tsx";
+import type Picture from "../classes/Picture.ts";
+import { fill, pick, rectangle, draw, line, circle } from "../utility/tools.ts";
+import ToolSelect from "./PixelEditor Components/ToolSelect.tsx";
+import ColorSelect from "./PixelEditor Components/ColorSelect.tsx";
+import type State from "../classes/State.ts";
+import type { Tool } from "../classes/State.ts";
+import SaveButton from "./PixelEditor Components/SaveButton.tsx";
+import LoadButton from "./PixelEditor Components/LoadButton.tsx";
+import UndoButton from "./PixelEditor Components/UndoButton.tsx";
 
 type pos = {
   x: number;
@@ -17,7 +17,7 @@ type pos = {
 // type controls = [typeof ToolSelect, typeof ColorSelect];
 
 export interface Dispatch {
-  tool?: tool;
+  tool?: Tool;
   color?: string;
   picture?: Picture;
   undo?: boolean;

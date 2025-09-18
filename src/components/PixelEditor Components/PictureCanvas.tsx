@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { SCALE } from "./settings";
-import { pointerPosition } from "./utilityFunctions";
-import Picture from "./Picture";
+import { SCALE } from "../../settings";
+import { pointerPosition } from "../../utility/utilityFunctions";
+import Picture from "../../classes/Picture";
 
 type pos = {
   x: number;
@@ -17,6 +17,7 @@ interface PictureCanvas {
 export default function PictureCanvas({
   picture,
   pointerDown,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   previous,
 }: PictureCanvas) {
   const canvasRef = useRef<null | HTMLCanvasElement>(null);

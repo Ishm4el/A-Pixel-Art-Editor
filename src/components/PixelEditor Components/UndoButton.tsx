@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
-import type { DispatchFunction } from "./PixelEditor";
-import type State from "./State";
+import type { DispatchFunction } from "../PixelEditor";
+import type State from "../../classes/State";
 
 interface UndoButton {
   state: State;

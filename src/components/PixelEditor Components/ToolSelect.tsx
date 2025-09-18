@@ -1,5 +1,5 @@
-import State from "./State";
-import { type config } from "./PixelEditor";
+import State, { isValidTool } from "../../classes/State";
+import { type config } from "../PixelEditor";
 
 // interface config {
 //   tools: {
@@ -23,11 +23,13 @@ export default function ToolSelect({ state, config }: ToolSelect) {
         name="toolSelect"
         id="toolSelect"
         onChange={(ev) => {
-          console.log(ev.currentTarget.value);
-          console.log(ev.currentTarget.nodeValue);
-
-          config.dispatch({ tool: ev.currentTarget.value });
-          ev.currentTarget.nodeValue = state.tool;
+          const selectedTool = ev.currentTarget.value;
+          if (isValidTool(selectedTool)) {
+            config.dispatch({ tool: selectedTool });
+            ev.currentTarget.nodeValue = state.tool;
+          } else {
+            throw new Error("Tool does not match any valid tool");
+          }
         }}
       >
         {Object.keys(config.tools).map((name) => (

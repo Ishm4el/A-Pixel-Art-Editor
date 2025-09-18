@@ -1,5 +1,5 @@
-import State from "./State";
-import { type DispatchFunction } from "./PixelEditor";
+import State from "../classes/State";
+import { type DispatchFunction } from "../components/PixelEditor";
 
 type masterState = [State, React.Dispatch<React.SetStateAction<State>>];
 

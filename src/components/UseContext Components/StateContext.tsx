@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-import State from "./State";
+import State from "./classes/State";
 
 export const StateContext = createContext<{
   state: State;

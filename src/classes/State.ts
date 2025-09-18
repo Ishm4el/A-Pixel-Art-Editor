@@ -1,10 +1,16 @@
 import Picture from "./Picture";
 
 type action = { [key: string]: string };
-export type tool = "fill" | "pick" | "rectangle" | "draw" | "line";
+
+const VALID_TOOLS = ["fill", "pick", "rectangle", "draw", "line"] as const;
+export type Tool = (typeof VALID_TOOLS)[number];
+
+export function isValidTool(value: string): value is Tool {
+  return VALID_TOOLS.includes(value as Tool);
+}
 
 interface Class {
-  tool: tool;
+  tool: Tool;
   color: string;
   picture: Picture;
   action?: action;
@@ -15,7 +21,7 @@ interface Class {
 }
 
 export default class State {
-  tool: tool;
+  tool: Tool;
   color: string;
   picture: Picture;
   action?: action;

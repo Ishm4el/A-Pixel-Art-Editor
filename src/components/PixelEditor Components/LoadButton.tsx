@@ -1,6 +1,6 @@
 import { useRef } from "react";
-import type { DispatchFunction } from "./PixelEditor";
-import Picture from "./Picture";
+import type { DispatchFunction } from "../PixelEditor";
+import Picture from "../../classes/Picture";
 
 interface LoadButton {
   dispatch: DispatchFunction;

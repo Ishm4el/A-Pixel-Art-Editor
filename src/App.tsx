@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Picture from "./Picture";
-import { fill, pick, rectangle, draw, line, circle } from "./tools";
-import State from "./State";
-import PixelEditor, { type Dispatch } from "./PixelEditor";
+import Picture from "./classes/Picture";
+import { fill, pick, rectangle, draw, line, circle } from "./utility/tools";
+import State from "./classes/State";
+import PixelEditor, { type Dispatch } from "./components/PixelEditor"
 
 export default function App() {
   const masterState = useState(

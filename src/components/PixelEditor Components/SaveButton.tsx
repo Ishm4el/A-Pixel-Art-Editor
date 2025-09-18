@@ -1,6 +1,5 @@
 import { useRef } from "react";
-import type State from "./State";
-import { SCALE } from "./settings";
+import type State from "../../classes/State";
 
 interface SaveButton {
   state: State;

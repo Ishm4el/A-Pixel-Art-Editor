@@ -1,4 +1,4 @@
-import { SCALE } from "./settings";
+import { SCALE } from "../settings";
 
 function pointerPosition(
   pos:
