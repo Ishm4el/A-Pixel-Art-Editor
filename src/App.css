@@ -1,0 +1,23 @@
+body {
+  background-color: white;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.container-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  list-style: none;
+}
+
+.container-buttons input,
+.container-buttons button,
+.container-buttons select {
+  height: 40px;
+}

@@ -2,7 +2,14 @@ import Picture from "./Picture";
 
 type action = { [key: string]: string };
 
-const VALID_TOOLS = ["fill", "pick", "rectangle", "draw", "line"] as const;
+const VALID_TOOLS = [
+  "fill",
+  "pick",
+  "rectangle",
+  "draw",
+  "line",
+  "circle",
+] as const;
 export type Tool = (typeof VALID_TOOLS)[number];
 
 export function isValidTool(value: string): value is Tool {

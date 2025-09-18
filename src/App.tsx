@@ -2,7 +2,8 @@ import { useState } from "react";
 import Picture from "./classes/Picture";
 import { fill, pick, rectangle, draw, line, circle } from "./utility/tools";
 import State from "./classes/State";
-import PixelEditor, { type Dispatch } from "./components/PixelEditor"
+import PixelEditor, { type Dispatch } from "./components/PixelEditor";
+import "./App.css";
 
 export default function App() {
   const masterState = useState(
@@ -45,12 +46,15 @@ export default function App() {
   };
 
   return (
-    <PixelEditor
-      masterState={masterState}
-      config={{
-        tools: { draw, fill, rectangle, pick, line, circle },
-        dispatch: dispatchHandler,
-      }}
-    />
+    <main>
+      <h1>Pixel Editor</h1>
+      <PixelEditor
+        masterState={masterState}
+        config={{
+          tools: { draw, fill, rectangle, pick, line, circle },
+          dispatch: dispatchHandler,
+        }}
+      />
+    </main>
   );
 }

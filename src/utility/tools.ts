@@ -84,7 +84,6 @@ function rectangle(
         drawn.push({ x, y, color: masterState[0].color });
       }
     }
-    // console.log(state.picture);
     dispatch({ picture: masterState[0].picture.draw(drawn) });
   }
   drawRectangle(start);

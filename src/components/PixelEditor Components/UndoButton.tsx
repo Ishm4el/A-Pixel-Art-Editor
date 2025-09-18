@@ -11,9 +11,6 @@ export default function UndoButton({ state, dispatch }: UndoButton) {
   const undoButtonRef = useRef<HTMLButtonElement | null>(null);
   useEffect(() => {
     if (undoButtonRef.current) {
-      console.log("in current");
-      console.log(state.done);
-
       undoButtonRef.current.disabled = state.done.length === 0;
     }
   }, [state]);

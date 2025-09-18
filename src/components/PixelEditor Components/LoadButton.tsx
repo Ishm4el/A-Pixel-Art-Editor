@@ -60,13 +60,10 @@ export default function LoadButton({ dispatch }: LoadButton) {
         if (typeof readerResult === "string") image.src = readerResult;
       });
       reader.readAsDataURL(file);
-      console.log("done");
     }
   };
 
   const inputHandler = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("in inputHandler");
-
     const files = ev.target.files;
     if (files) {
       finishLoad(files[0], dispatch);

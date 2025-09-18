@@ -32,7 +32,6 @@ export default function PictureCanvas({
       let pos = pointerPosition(downEvent, canvasElement);
       const onMove = onDown(pos);
       if (!onMove) return;
-      console.log("moving");
 
       const move = (moveEvent: MouseEvent) => {
         if (canvasRef.current) {
@@ -88,8 +87,8 @@ export default function PictureCanvas({
         for (let x = 0; x < picture.width; x++) {
           // const color = picture.pixel(x, y);
           // if (previous == null || previous.pixel(x, y) != color) {
-            cx.fillStyle = picture.pixel(x, y);
-            cx.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
+          cx.fillStyle = picture.pixel(x, y);
+          cx.fillRect(x * SCALE, y * SCALE, SCALE, SCALE);
           // }
         }
       }

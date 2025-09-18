@@ -9,7 +9,6 @@ interface ColorSelect {
 export default function ColorSelect({ state, config }: ColorSelect) {
   return (
     <label>
-      Color:{" "}
       <input
         type="color"
         value={state.color}

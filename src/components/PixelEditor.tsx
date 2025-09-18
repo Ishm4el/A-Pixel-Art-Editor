@@ -52,19 +52,26 @@ export default function PixelEditor({ masterState, config }: PixelEditor) {
     if (onMove) return (pos: pos) => onMove(pos, masterState);
   };
 
+  const buttons = [
+    <ToolSelect config={config} state={masterState[0]} />,
+    <ColorSelect config={config} state={masterState[0]} />,
+    <SaveButton state={masterState[0]} />,
+    <LoadButton dispatch={config.dispatch} />,
+    <UndoButton dispatch={config.dispatch} state={masterState[0]} />,
+  ];
+
   return (
-    <div>
+    <>
       <PictureCanvas
         picture={masterState[0].picture}
         pointerDown={posFunction}
         previous={masterState[0].done[0]}
       />
-      <br />
-      <ToolSelect config={config} state={masterState[0]} />{" "}
-      <ColorSelect config={config} state={masterState[0]} />{" "}
-      <SaveButton state={masterState[0]} />
-      <LoadButton dispatch={config.dispatch} />
-      <UndoButton dispatch={config.dispatch} state={masterState[0]} />
-    </div>
+      <menu className="container-buttons">
+        {buttons.map((element, index) => (
+          <li key={index}>{element}</li>
+        ))}
+      </menu>
+    </>
   );
 }
